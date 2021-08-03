@@ -12,7 +12,7 @@ const Container = styled.div`
 	// text-decoration: line-thro;
 	background-color: ${props => (props.isDragging ? 'lightgreen' : 'white')};
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 `;
 
 const Input = styled.input`
@@ -43,23 +43,21 @@ export default class Task extends React.Component {
 			<Draggable draggableId={this.props.task.id} index={this.props.index}>
 				{(provided, snapshot) => (
 					<Container
+						style={containerStyle}
 						{...provided.draggableProps}
 						{...provided.dragHandleProps}
 						ref={provided.innerRef}
 						isDragging={snapshot.isDragging}
-						style={containerStyle}
 					>
-						<div onContextMenu={this.props.onRightClick}>
-							<Input type='checkbox' onChange={this.onCheckChange} />
-							{this.props.task.content}
-							{/* <Select
+						<Input type='checkbox' onChange={this.onCheckChange} />
+						{this.props.task.content}
+						{/* <Select
 								closeMenuOnSelect={false}
 								components={animatedComponents}
 								defaultValue={this.props.task.students}
 								isMulti
 								isClearable={true}
 							/> */}
-						</div>
 					</Container>
 				)}
 			</Draggable>
